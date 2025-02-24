@@ -9,3 +9,5 @@ vo 是 view object，用于返回给视图的数据的封装。
 而 entity 是和数据库表对应的实体类。
 
 4. @Query是怎么用的
+
+5. 再看一下interceptor那些
