@@ -6,7 +6,8 @@ import {
   Query,
   Inject,
   UnauthorizedException,
-  ParseIntPipe,
+  UseInterceptors,
+  UploadedFile,
   BadRequestException,
 } from '@nestjs/common';
 import { UserService } from './user.service';
@@ -21,6 +22,9 @@ import { UserDetailVo } from './user-info.vo';
 import { UpdateUserPasswordDto } from './vo/update-user-password.dto';
 import { UpdateUserDto } from './dto/udpate-user.dto';
 import { generateParseIntPipe } from 'src/utils/utils';
+import { FileInterceptor } from '@nestjs/platform-express';
+import * as path from 'path';
+import { storage } from 'src/my-file-storage';
 
 @Controller('user')
 export class UserController {
@@ -292,5 +296,28 @@ export class UserController {
       pageNo,
       pageSize,
     );
+  }
+
+  @Post('upload')
+  @UseInterceptors(
+    FileInterceptor('file', {
+      dest: 'uploads',
+      storage: storage,
+      limits: {
+        fileSize: 1024 * 1024 * 3,
+      },
+      fileFilter(req, file, callback) {
+        const extname = path.extname(file.originalname);
+        if (['.png', '.jpg', '.gif'].includes(extname)) {
+          callback(null, true);
+        } else {
+          callback(new BadRequestException('只能上传图片'), false);
+        }
+      },
+    }),
+  )
+  uploadFile(@UploadedFile() file: Express.Multer.File) {
+    console.log('file', file);
+    return file.path;
   }
 }
