@@ -60,13 +60,14 @@ import { PermissionGuard } from './permission.guard';
   controllers: [AppController],
   providers: [
     AppService,
-    {
-      provide: APP_GUARD,
-      useClass: LoginGuard,
-    },
+    // 全局使用guard
     {
       provide: APP_GUARD,
       useClass: PermissionGuard,
+    },
+    {
+      provide: APP_GUARD,
+      useClass: LoginGuard,
     },
   ],
 })

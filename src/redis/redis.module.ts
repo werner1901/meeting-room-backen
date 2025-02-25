@@ -3,7 +3,7 @@ import { RedisService } from './redis.service';
 import { createClient } from 'redis';
 import { ConfigService } from '@nestjs/config';
 
-// 声明为全局模块就不用四处导入了
+// 声明为全局了
 @Global()
 @Module({
   providers: [
@@ -21,7 +21,7 @@ import { ConfigService } from '@nestjs/config';
         await client.connect();
         return client;
       },
-      inject: [ConfigService], //这里是什么意思
+      inject: [ConfigService], //注意这里要注入
     },
   ],
   exports: [RedisService],
