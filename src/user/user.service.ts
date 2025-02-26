@@ -107,6 +107,12 @@ export class UserService {
     await this.userRepository.save([user1, user2]);
   }
 
+  async deleteInitData() {
+    await this.userRepository.delete([8, 9]);
+    await this.roleRepository.delete([1, 2, 3, 4, 5, 6, 7, 8]);
+    await this.permissionRepository.delete([1, 2, 3, 4, 5, 6, 7, 8]);
+  }
+
   async login(loginUserDto: LoginUserDto, isAdmin: boolean) {
     const user = await this.userRepository.findOne({
       where: {

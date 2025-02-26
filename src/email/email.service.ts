@@ -21,7 +21,7 @@ export class EmailService {
   async sendMail({ to, subject, html }) {
     await this.transporter.sendMail({
       from: {
-        name: '会议室预定系统',
+        name: '会议室预定',
         address: this.configService.get('email_user'),
       },
       to,

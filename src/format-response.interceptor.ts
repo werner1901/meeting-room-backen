@@ -15,6 +15,7 @@ export class FormatResponseInterceptor implements NestInterceptor {
     return next.handle().pipe(
       map((data) => {
         return {
+          // 在返回体里把http状态加上一起返回了
           code: response.statusCode,
           message: 'success',
           data,
