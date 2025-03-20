@@ -9,7 +9,6 @@ import { UpdateMeetingRoomDto } from './dto/update-meeting-room.dto';
 export class MeetingRoomService {
   @InjectRepository(MeetingRoom)
   private repository: Repository<MeetingRoom>;
-  entityManager: any;
 
   initData() {
     const room1 = new MeetingRoom();
