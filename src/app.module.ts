@@ -18,7 +18,7 @@ import { MeetingRoom } from './meeting-room/entities/meeting-room.entity';
 import { BookingModule } from './booking/booking.module';
 import { StatisticModule } from './statistic/statistic.module';
 import { Booking } from './booking/entities/booking.entity';
-import path from 'path';
+import * as path from 'path';
 
 @Module({
   imports: [
@@ -31,7 +31,7 @@ import path from 'path';
           username: configService.get('mysql_server_username'),
           password: configService.get('mysql_server_password'),
           database: configService.get('mysql_server_database'),
-          synchronize: true,
+          synchronize: false,
           logging: true,
           entities: [User, Role, Permission, MeetingRoom, Booking],
           poolSize: 10,
