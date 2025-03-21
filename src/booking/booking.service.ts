@@ -27,17 +27,17 @@ export class BookingService {
 
   async initData() {
     const user1 = await this.entityManager.findOneBy(User, {
-      id: 1,
+      username: 'zhangsan',
     });
     const user2 = await this.entityManager.findOneBy(User, {
-      id: 2,
+      username: 'lisi',
     });
 
     const room1 = await this.entityManager.findOneBy(MeetingRoom, {
-      id: 3,
+      id: 1,
     });
     const room2 = await this.entityManager.findOneBy(MeetingRoom, {
-      id: 6,
+      id: 2,
     });
 
     const booking1 = new Booking();
@@ -128,10 +128,10 @@ export class BookingService {
       },
     );
 
-    bookings.map((item) => {
-      delete item.user.password;
-      return item;
-    });
+    // bookings.map((item) => {
+    //   delete item.user.password;
+    //   return item;
+    // });
 
     return {
       bookings,

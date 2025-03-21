@@ -3,9 +3,7 @@ import {
   Get,
   Post,
   Body,
-  Patch,
   Param,
-  Delete,
   DefaultValuePipe,
   Query,
 } from '@nestjs/common';
@@ -43,6 +41,11 @@ export class BookingController {
       bookingTimeRangeStart,
       bookingTimeRangeEnd,
     );
+  }
+
+  @Get('init-data')
+  initData() {
+    this.bookingService.initData();
   }
 
   @Post('add')
